@@ -1,0 +1,33 @@
+jobs:
+  - name: daily
+    schedule: '0 12 * * *'
+    steps:
+      - name: clean environment
+        command: dbt clean
+      - name: install dependencies
+        command: dbt deps
+      - name: debug configuration
+        command: dbt debug
+      - name: compile models
+        command: dbt compile
+      - name: generate docs
+        command: dbt docs generate
+      - name: run models
+        command: dbt run
+      - name: test models
+        command: dbt test
+  - name: weekdays
+    schedule: '30 7 * * 1-5'
+    steps:
+      - name: clean environment
+        command: dbt clean
+      - name: install dependencies
+        command: dbt deps
+      - name: debug configuration
+        command: dbt debug
+      - name: compile models
+        command: dbt compile
+      - name: generate docs
+        command: dbt docs generate
+      - name: run models
+        command: dbt run --models apply_condition
